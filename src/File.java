@@ -172,7 +172,7 @@ public class File {
         long otherStart = other.creationTime.getTime();
         long otherEnd = other.modificationTime.getTime();
 
-        // check if file.modificationTime overlaps with other.creationTime
+        // check if file.modificationTime overlaps with other.creationTime !
         boolean overlap = (otherStart < thisEnd && thisStart < otherEnd);
         return overlap;
     }

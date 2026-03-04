@@ -7,8 +7,8 @@ import java.util.Date;
  * OGP Practicum 1
  *
  *
- * @author Casper Vermeren; Loïck Sansen; Wim Dekeyser
- * @version 1.0
+ * @author Casper Vermeren; Loïck Sansen
+ * @version 1.11
  */
 
 public class File {
@@ -23,6 +23,9 @@ public class File {
 
     /**
      * Initialize this new file with given name, size 0 and writable state true.
+     *
+     * @effect This name is set to given name
+     *      | setName(name)
      *
      * @param name
      *        the name of this new file
@@ -229,10 +232,12 @@ public class File {
      * @pre the file size should be positive and smaller than the maximum file size.
      *      the resulting size is positive.
      *      | size > 0 && size < maxSize
-     *      | size - amount > 0
+     *
+     * @pre amount should be positive
+     *      | amount > 0
      *
      * @post the file size equals the old file size minus the given amount
-     *       | new.size == old.size - amount
+     *       | new.size == size - amount
      *
      * @note nominal because it concerns a quantity.
      */
@@ -291,14 +296,11 @@ public class File {
      * @param other
      *        file to be checked if it overlaps with this file
      *
-     * @return boolean
-     *         returns true if it overlaps and false otherwise.
-     *
-     * @post the result is true if and only if both files have a modification time and their use periods overlap.
-     *       | result == (this. modificationTime != null &&
-     *       | other.modificationTime != null &&
-     *       | other.creationTime.getTime() < this.modificationTime.getTime() &&
-     *       | this.creationTime.getTime() < other.modificationTime.getTIme())
+     * @return the result is true if and only if both files have a modification time and their use periods overlap.
+     *      | result == (this. modificationTime != null &&
+     *      | other.modificationTime != null &&
+     *      | other.creationTime.getTime() < this.modificationTime.getTime() &&
+     *      | this.creationTime.getTime() < other.modificationTime.getTIme())
      *
      * @note total (nominal or defensive was allowed)
      */
@@ -319,3 +321,4 @@ public class File {
         return overlap;
     }
 }
+

@@ -58,6 +58,15 @@ public class FileTest {
         assertNull(file.getModificationTime());
     }
 
+
+    @Test
+    public void illegalWritingTest() {
+        assertThrows(IllegalStateException.class, () -> {
+            File testFile = new File("mySafeFile",44,false);
+            testFile.enlarge(50);
+        });
+    }
+
     // Overlapping test ???
 
 }

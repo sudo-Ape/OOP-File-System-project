@@ -142,14 +142,16 @@ public class File {
      * @note changeIllegalName() method was removed because we throw illegalArgumentExceptions in this method.
      */
     public void changeName(String name) throws IllegalStateException, IllegalArgumentException {
+        // Check if file is writable
         if (!this.isWritable()) {
             throw new IllegalStateException("File is not writable");
         }
-        if (!isValidName(name)) {
-            throw new IllegalArgumentException("Invalid name: " + name);
+        // check if given character in name are legal
+        if (isValidName(name)) {
+            this.name = name;
+        } else {
+            this.name = "New-File";
         }
-        this.setName(name);
-        this.modificationTime = new Date();
     }
 
     /**

@@ -1,14 +1,14 @@
 ## **Import**
-[] Download KU Leuven packages <\br>
+[] Download KU Leuven packages\
 
 ## **DiskItem**
-[] setParentDirectory() method --> check if everything is made properly <\br>
-[] isDirectOrIndirectChildOf() method <\br>
+[] setParentDirectory() method --> check if everything is made properly\
+[] isDirectOrIndirectChildOf() method\
 [] change hasOverlappingUsePeriod() method to fit DiskItem class 
 
 ## **File**
-[] getAbsolutePath() method <\br>
-[] getRoot() method <\br>
+[] getAbsolutePath() method\
+[] getRoot() method\
 [] check if there are unnecessary constructors, otherwise delete
 
 ## **Directory**
@@ -18,6 +18,6 @@
 [] Start
 
 ## **Not yet clear to what this belongs**
-[] move() method <\br>
+[] move() method\
 [] makeRoot() method
 

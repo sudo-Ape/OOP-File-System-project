@@ -1,6 +1,9 @@
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
+import filesystem.DiskItem;
+
 import java.util.Date;
+
 
 /**
  * A class representing a file with a name, size, and writable state.
@@ -21,7 +24,7 @@ import java.util.Date;
  * @invar The modification time must always be valid
  *      | canHaveAsModificationTime(getModificationTime())
  */
-public class File {
+public class File extends DiskItem {
 
     // =====================================================================
     // Fields

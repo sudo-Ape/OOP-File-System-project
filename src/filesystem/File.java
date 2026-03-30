@@ -1,6 +1,7 @@
+package filesystem;
+
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
-import filesystem.DiskItem;
 
 import java.util.Date;
 

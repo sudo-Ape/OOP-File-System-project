@@ -24,6 +24,7 @@ public class File extends DiskItem {
     // Fields
     // =====================================================================
 
+    private static final String defaultName = "New-File";
     private FileType type;
     private int size = 0;
     private static final int maxSize = Integer.MAX_VALUE;
@@ -78,7 +79,7 @@ public class File extends DiskItem {
     public File(String name, int size, boolean writable, FileType type) {
         super(name, writable);
         this.type = type;               // set directly to avoid modificationTime side effect
-        this.size = size;
+        this.setSize(size);
     }
 
 
@@ -139,7 +140,6 @@ public class File extends DiskItem {
      *         and contains only letters, digits, dots, dashes or underscores
      *      | result == (name != null && name.matches("[a-zA-Z0-9_.\\-]+"))
      */
-    @Override
     protected boolean isValidName(String name) {
         return name != null && name.matches("[a-zA-Z0-9_.\\-]+");
     }
@@ -149,7 +149,7 @@ public class File extends DiskItem {
      *
      * @return Default name "New-File"
      */
-    protected String getDefaultName(){
+    public String getDefaultName(){
         return "New-File";
     }
 

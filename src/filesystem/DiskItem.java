@@ -28,11 +28,13 @@ public abstract class DiskItem {
 // =====================================================================
 
     protected String name = null;
+    protected String defaultName = null;
     protected Date creationTime = null;
     protected Date modificationTime = null;
     protected Directory parentDirectory = null;
     protected boolean writable = false;
     protected boolean isTerminated = false;
+
 
 // =====================================================================
 // Constructors
@@ -182,7 +184,7 @@ public abstract class DiskItem {
         if (isValidName(name)) {
             this.name = name;
         } else {
-            this.name = getDefaultName();
+            this.name = ();
         }
     }
 
@@ -200,7 +202,9 @@ public abstract class DiskItem {
      *
      * @return The default name of the item.
      */
-    protected abstract String getDefaultName();
+    protected String getDefaultName() {
+        return defaultName;
+    };
 
 
     /**
@@ -312,7 +316,7 @@ public abstract class DiskItem {
      *
      * @param creationTime Creation time of the item
      *
-     * @return True if and only if the creationtime is not null
+     * @return True if and only if the creation time is not null
      *      | result == (creationTime != null)
      */
     public static boolean isValidCreationTime(Date creationTime){
@@ -335,14 +339,14 @@ public abstract class DiskItem {
 
 
     /**
-     * Check whether this file has an overlapping use period with the given file.
-     *      The use period of a file spans from its creation time to its last modification time.
-     *      Two files overlap if both have been modified and their use periods intersect.
+     * Check whether this item has an overlapping use period with the given file.
+     *      The use period of a item spans from its creation time to its last modification time.
+     *      Two items overlap if both have been modified and their use periods intersect.
      *
-     * @param other
-     *        The file to check overlap with
+     * @param directory
+     *        The directory to check overlap with
      *
-     * @return True if and only if both files have a modification time and their use periods overlap
+     * @return True if and only if both items have a modification time and their use periods overlap
      *      | result == (this.getModificationTime() != null &&
      *      |            other.getModificationTime() != null &&
      *      |            other.getCreationTime().getTime() < this.getModificationTime().getTime() &&
@@ -389,6 +393,15 @@ public abstract class DiskItem {
      */
     public Directory getParentDirectory() {return parentDirectory;}
 
+
+    /**
+     * Checks whether an item has given directory as parent directory
+     *
+     * @return
+     */
+    public Directory canHaveAsParentDirectory(Directory directory){
+
+    }
 
     /**
      * Checks whether an item is contained directly or indirectly within a given directory

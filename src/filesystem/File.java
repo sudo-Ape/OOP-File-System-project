@@ -121,6 +121,7 @@ public class File extends DiskItem {
      *
      * @return Default name "New-File"
      */
+    @Override
     public String getDefaultName(){
         return "New-File";
     }

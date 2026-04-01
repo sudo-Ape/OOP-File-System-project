@@ -49,6 +49,14 @@ public class Directory extends DiskItem{
     // Methods
     // =====================================================================
 
+    public void addItem(DiskItem item){
+
+    }
+
+    public void removeItem(DiskItem item){
+
+    }
+
     @Override
     public String getAbsolutePath() {
 

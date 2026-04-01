@@ -94,12 +94,30 @@ public abstract class DiskItem {
 
 
     /**
-     * Move this item to given target location
+     * Move this item to target directory
+     * @throws IllegalStateException If the target directory does not exist
+     *      | !canHaveAsParentDirectory(targetDirectory)
      *
-     * @param target Location where item is moved to.
+     * @post Remove this item from the directory it was already in
+     *      | this.getParentDirectory().hasAsItem(new)
+     *
+     * @post This item is added to given target directory
+     *      | targetDirectory().hasAsItem(new)
+     *
+     * @post The target directory becomes the new parent directory
+     *      |new.getParentDirectory() == targetDirectory
+     *
+     * @param target The target directory to which the item will be moved
      */
-    public void move(Directory target){
+    public void move(Directory target) throws MoveException{
+        if (target == null){
+            throw new MoveException("Directory does not exist");
+        }
+        target.addItem(this);
 
+        if(this.parentDirectory != null){
+            this.parentDirectory.removeItem(this);
+        }
     }
 
     /**
@@ -164,7 +182,7 @@ public abstract class DiskItem {
         if (isValidName(name)) {
             this.name = name;
         } else {
-            this.name = ();
+            this.name = getDefaultName();
         }
     }
 
@@ -180,11 +198,8 @@ public abstract class DiskItem {
     /**
      * Return the default name of the item.
      *
-     * @return The default name of the item.
      */
-    protected String getDefaultName() {
-        return defaultName;
-    };
+    protected abstract String getDefaultName();
 
 
     /**
@@ -379,8 +394,27 @@ public abstract class DiskItem {
      *
      * @return
      */
-    public Directory canHaveAsParentDirectory(Directory directory){
+    public boolean canHaveAsParentDirectory(Directory directory){
+        // Check if parent directory is valid
+        if (parentDirectory == null || parentDirectory.isTerminated()) {
+            return false;
+        }
 
+        // Directory cannot have itself as parent
+        if (this == directory) {
+            return false;
+        }
+
+        // Parent directory cannot already contain an item with the saùe name
+        if (parentDirectory.containsDiskItemWithName(this.getName())){
+            return false;
+        }
+
+        //Parent directory cannot be one of its own children
+        if (parentDirectory.isDirectOrIndirectChildOf(this)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -390,7 +424,7 @@ public abstract class DiskItem {
      *
      * @return True if and only if the item is directly contained within the given directory
      */
-    public Directory isDirectOrIndirectChildOf(Directory directory){
+    public Directory isDirectOrIndirectChildOf(DiskItem directory){
 
     }
 
